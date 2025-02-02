@@ -25,7 +25,7 @@ class Users1(db.Model):
 
 @app.route("/signup", methods=["POST"])
 def sign_up():
-    data = request.get_json()
+    data = request.form
     
     if not data:
         return jsonify({"message": "Invalid JSON input"}), 400
@@ -41,17 +41,21 @@ def sign_up():
 
 @app.route("/login", methods=["POST"])
 def login():
-    data = request.get_json()
+    data = request.form
     
     if not data:
         return jsonify({"message": "Invalid JSON input"}), 400
     
     try:
-        user_record = Users1.query.filter_by(email=data["email"], password=data["password"])
+        user_record = db.session.query(Users1).filter_by(email=data["email"], password=data["password"]).first()
         if user_record:
             return jsonify({"message": "Log in successful"}), 200
     except KeyError:
         return jsonify({"message": "Invalid JSON input"}), 400
+    except Exception:
+        return jsonify({"message": "Unknown error occured"}), 404
+    
+    return jsonify({"message": "Login unsuccessful"}), 400
 
 if __name__ == "__main__":
     app.run(port="8080", debug=True)

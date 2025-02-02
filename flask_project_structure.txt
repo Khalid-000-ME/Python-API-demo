@@ -1,0 +1,19 @@
+flask_api_project/
+│── app/
+│   ├── __init__.py          # Initializes the Flask app
+│   ├── models.py            # Database models (SQLAlchemy)
+│   ├── routes.py            # API routes
+│   ├── services.py          # Business logic
+│   ├── utils.py             # Utility functions
+│   ├── config.py            # Configuration settings
+│── migrations/              # Database migrations (if using Flask-Migrate)
+│── static/                  # Static files (if needed)
+│── templates/               # HTML templates (if needed)
+│── tests/                   # Unit tests
+│   ├── test_routes.py       # Test API endpoints
+│── venv/                    # Virtual environment (optional)
+│── .env                     # Environment variables
+│── .gitignore               # Git ignore file
+│── requirements.txt         # Python dependencies
+│── run.py                   # Entry point to run the app
+│── README.md                # Project documentation

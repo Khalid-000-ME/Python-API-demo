@@ -6,6 +6,11 @@ from markupsafe import Markup
 app = Flask(__name__)
 app.secret_key = "12345"
 
+@app.route("/", methods=["GET"])
+def index():
+    return render_template("index.html")
+
+
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
@@ -38,7 +43,8 @@ def login():
             session['result'] = response.json().get("message", "Signup successful!")
             return redirect("/loginsuccess")
         else:
-            return "Error in external API request", response.status_code
+            session['result'] = response.json().get("message", "Signup successful!")
+            return redirect("/loginsuccess")
     return render_template("login.html")
 
 @app.route("/loginsuccess", methods=["GET", "POST"])
@@ -47,10 +53,10 @@ def login_success():
     return render_template("loginsuccess.html", result=data)
 
         
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html")
         
-        
-
-
 
 if __name__ == "__main__":
     app.run(port="3000", debug=True)

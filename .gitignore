@@ -1,2 +1,2 @@
-DB_Form/frontend/static/*
-DB_Form/backend/
+DB_Form/frontend/static/
+DB_Form/backend/.env
